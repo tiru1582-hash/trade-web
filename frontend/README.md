@@ -44,8 +44,8 @@ To initialize the terminal on your local node:
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/quantlab-terminal.git
-cd quantlab-terminal
+git clone https://github.com/tiru1582-hash/trade-web.git
+cd frontend
 
 ```
 
