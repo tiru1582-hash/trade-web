@@ -1,16 +1,90 @@
-# React + Vite
+# ⚡ QuantLab | Institutional Trading Terminal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**QuantLab** is a high-performance, quantitative trading interface designed for zero-latency market execution. By bypassing a traditional backend and connecting directly to financial data streams, QuantLab provides institutional-grade price discovery and technical analysis in a sleek, glassmorphic environment.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Key Modules
 
-## React Compiler
+### 1. Neural Execution Hub (`TradingPage.jsx`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The central engine of the terminal. It maintains a persistent **WebSocket** link to the markets, distributing live price payloads to all sub-nodes (Charts, Order Books, and Position Tables) simultaneously.
 
-## Expanding the ESLint configuration
+### 2. High-Fidelity Charting (`TradingViewChart.jsx`)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Powered by `lightweight-charts`, this module handles:
+
+* **Historical Reconstruction:** Fetches up to 1,000 bars of history via REST API.
+* **Live Flux:** Real-time candlestick updates via Binance `@kline` streams.
+* **Adaptive Timeframes:** Instant switching between 1M, 1H, and 1D intervals.
+
+### 3. Market Discovery (`MarketExplore.jsx` & `MarketWatch.jsx`)
+
+Real-time asset tracking utilizing:
+
+* **CoinGecko API:** For global market cap and asset metadata.
+* **Mini-Ticker Streams:** High-speed price flux for broad market monitoring.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Core:** React 18
+* **Styling:** Tailwind CSS (Custom "Quant" Dark Theme)
+* **Animations:** Framer Motion (Layout transitions & Micro-interactions)
+* **Charts:** Lightweight Charts (TradingView)
+* **Icons:** Lucide React
+* **Data:** Binance API (REST & WebSockets), CoinGecko API
+
+---
+
+## 📦 Installation & Deployment
+
+To initialize the terminal on your local node:
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/your-username/quantlab-terminal.git
+cd quantlab-terminal
+
+```
+
+
+2. **Install Dependencies:**
+```bash
+npm install
+
+```
+
+
+3. **Start the Development Server:**
+```bash
+npm run dev
+
+```
+
+
+
+---
+
+## 🔌 Data Integration Architecture
+
+The terminal utilizes a "No-Backend" strategy for maximum speed:
+
+* **REST Polling:** Used only for initial metadata and historical data sets.
+* **WebSocket Pushes:** Handles all live price movement (`lastPrice`, `bid`, `ask`).
+* **Client-Side Computation:** P&L, margin requirements, and spread logic are calculated locally on the client's CPU to ensure sub-millisecond responsiveness.
+
+---
+
+## 📋 Best Practices Included
+
+* **Data Fidelity:** Uses `tabular-nums` and `font-mono` to prevent UI "jitter" during rapid price updates.
+* **Memory Efficiency:** Strict WebSocket cleanup logic in `useEffect` to prevent memory leaks.
+* **Responsive Design:** Optimized grid layouts for ultra-wide desktop monitors and mobile "On-the-Go" execution.
+
+---
+
+## 📜 License
+
+Internal QuantLab Distribution. Unauthorized redistribution of Quantitative Execution logic is prohibited.
